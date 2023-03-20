@@ -1,0 +1,10 @@
+apply plugin: "io.gitlab.arturbosch.detekt"
+
+detekt {
+    toolVersion = "$core.detekt"
+    config = files("$rootDir${File.separatorChar}tools${File.separatorChar}detekt${File.separatorChar}detekt.yml")
+}
+
+dependencies {
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:[$core.detekt]")
+}

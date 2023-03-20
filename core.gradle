@@ -1,0 +1,3 @@
+apply from: "$rootDir/tools/compilationOptions.gradle"
+apply from: "$rootDir/tools/defaultConfig.gradle"
+apply from: "$rootDir/tools/features.gradle"

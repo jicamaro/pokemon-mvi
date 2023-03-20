@@ -1,0 +1,8 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id "kotlin-parcelize"
+}
+
+apply from: "../core.gradle"
+apply from: "$rootDir/tools/dependencies.gradle"

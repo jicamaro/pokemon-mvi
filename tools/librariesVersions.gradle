@@ -1,0 +1,70 @@
+import java.text.SimpleDateFormat
+
+buildscript {
+    ext {
+        core = [:]
+        core.targetSdk = 33
+        core.minSdk = 23
+        core.gradle = '7.4.2'
+        core.kotlin = '1.8.10'
+        core.detekt = '1.20.0'
+        core.jacoco = '0.8.7'
+        core.snakeYaml = '1.30'
+        core.safeArgs = '2.5.0'
+    }
+}
+
+allprojects {
+
+    ext {
+        config = [:]
+        config.buildDate = "\"${new SimpleDateFormat("dd/MM/yyyy").format(new Date())}\""
+        config.versionCode = { ->
+            def code = new ByteArrayOutputStream()
+            exec {
+                commandLine 'git', 'tag', '--list'
+                standardOutput = code
+            }
+            return code.toString().split("\n").size()
+        }
+
+        library = [:]
+        library.androidX = '1.8.0'
+        library.retrofit = '2.9.0'
+        library.appCompat = '1.4.2'
+        library.fragmentKtx = '1.5.0'
+        library.material = '1.6.1'
+        library.constraintlayout = '2.1.4'
+        library.coroutines = '1.6.1'
+        library.room = '2.4.2'
+        library.lifecycle = '2.6.0'
+        library.workManager = '2.7.1'
+        library.navigation = '2.5.0'
+        library.koin = '3.2.0'
+        library.okHttp = '4.10.0'
+        library.zxing = '3.5.0'
+        library.zxingAndroid = '4.3.0'
+        library.gson = '2.9.0'
+        library.securityCrypto = '1.0.0'
+        library.glide = '4.14.2'
+
+        test = [:]
+        test.junit = '4.13.2'
+        test.androidJUnit = '1.1.3'
+        test.espresso = '3.4.0'
+        test.room = library.room
+        test.lifecycle = '2.2.0'
+        test.workManager = '2.7.1'
+        test.navigation = library.navigation
+        test.koin = '3.1.6'
+        test.mockk = '1.12.4'
+        test.mockWebServer = '4.9.3'
+        test.androidXTest = '1.5.0'
+        test.turbine = '0.8.0'
+        test.androidXMonitor = '1.5.0'
+        test.androidXJUnit = '1.1.3'
+        test.coroutines = library.coroutines
+        test.fragmentKtx = library.fragmentKtx
+        test.robolectric = '4.9.1'
+    }
+}

@@ -1,0 +1,27 @@
+Properties localProperties = new Properties()
+if (project.rootProject.file('local.properties').exists()) {
+    localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
+}
+
+buildscript { scriptHandler ->
+
+    apply from: "$rootDir/tools/repositories.gradle", to: scriptHandler
+    apply from: "$rootDir/tools/librariesVersions.gradle"
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:$core.gradle"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$core.kotlin"
+        classpath "org.jacoco:org.jacoco.core:$core.jacoco"
+        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$core.detekt"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$core.safeArgs"
+    }
+}
+
+subprojects {
+    apply from: "$rootDir/tools/detekt/detekt.gradle"
+    apply from: "$rootDir/tools/jacoco/jacoco.gradle"
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
